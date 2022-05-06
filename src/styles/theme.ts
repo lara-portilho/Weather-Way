@@ -15,4 +15,8 @@ export const theme = extendTheme({
 		},
 		white: "#F1F1F1",
 	},
+	config: {
+		initialColorMode: "light",
+		useSystemColorMode: false,
+	},
 });

@@ -13,9 +13,7 @@ export const useStore = () => {
 				icon: "",
 				temperature: 0,
 			},
-			ui: {
-				bgColor: "",
-			},
+			ui: {},
 		});
 	}
 

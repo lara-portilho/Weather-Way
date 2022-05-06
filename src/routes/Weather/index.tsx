@@ -1,29 +1,34 @@
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { useRouter } from "next/router";
-import {
-	FormLabel,
-	FormControl,
-	Input,
-	Button,
-	Box,
-	Flex,
-	Image,
-} from "@chakra-ui/react";
+import { Button, Box, Flex, Image, Radio, Stack } from "@chakra-ui/react";
 
 import { SearchIcon } from "@chakra-ui/icons";
+//import { RHRadio } from "src/components/RHRadio";
+import { RHInputText } from "src/components/RHInputText";
+import { RHSelect } from "src/components/RHSelect";
+import { useState } from "react";
+
+import { CRadioGroup } from "src/components/CRadioGroup";
 
 type FormData = {
 	city: string;
 };
 
 export const Weather = () => {
-	const { register, handleSubmit } = useForm<FormData>({
-		defaultValues: { city: "" },
-	});
+	const { handleSubmit } = useFormContext<FormData>();
+
+	const [radio, setRadio] = useState("zip");
+
 	const router = useRouter();
 	const onSubmit = (data: FormData) => {
-		router.push(`/weather/${data.city}`);
+		//router.push(`/weather/${data.city}`);
+		console.log(data);
 	};
+
+	const countryCodes = [
+		{ value: "BR", label: "Brasil" },
+		{ value: "US", label: "Estados Unidos" },
+	];
 
 	return (
 		<Flex
@@ -35,32 +40,52 @@ export const Weather = () => {
 			flexDirection="column"
 		>
 			<Box as="form" onSubmit={handleSubmit(onSubmit)}>
-				<FormControl isRequired>
-					<FormLabel htmlFor="city">Digite uma cidade</FormLabel>
-					<Flex as="div">
-						<Input
-							id="city"
-							{...register("city", {
-								required: true,
-							})}
-							backgroundColor="white"
-							borderRightRadius="0"
-						/>
-						<Button
-							type="submit"
-							backgroundColor="blue"
-							color="white"
-							_hover={{
-								backgroundColor: "blue",
-								color: "white",
-								opacity: "0.6",
-							}}
-							borderLeftRadius="0"
-						>
-							<SearchIcon />
-						</Button>
-					</Flex>
-				</FormControl>
+				<CRadioGroup
+					name="searchMethod"
+					value={radio}
+					onChange={setRadio}
+				>
+					<Stack>
+						<Radio isChecked value="zip">
+							Código
+						</Radio>
+						<Radio value="city">Cidade</Radio>
+					</Stack>
+				</CRadioGroup>
+
+				<RHInputText
+					name="city"
+					label="Cidade"
+					marginBottom="20px"
+					backgroundColor="white"
+				/>
+				<RHInputText
+					name="zip"
+					label="Código Postal"
+					marginBottom="20px"
+					backgroundColor="white"
+				/>
+				<RHSelect
+					name="country"
+					selectOptions={countryCodes}
+					label="País"
+					marginBottom="20px"
+					backgroundColor="white"
+				/>
+
+				<Button
+					type="submit"
+					backgroundColor="blue"
+					color="white"
+					_hover={{
+						backgroundColor: "blue",
+						color: "white",
+						opacity: "0.6",
+					}}
+					leftIcon={<SearchIcon />}
+				>
+					Pesquisar
+				</Button>
 			</Box>
 
 			<Image
