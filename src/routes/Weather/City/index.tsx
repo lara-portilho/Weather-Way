@@ -12,7 +12,7 @@ export const City = observer(() => {
 		<Box
 			height="100vh"
 			width="100%"
-			bgGradient={`linear(to-t, green, ${store.ui.bgColor}, ${store.ui.bgColor})`}
+			bgGradient={`linear(to-t, green.500, ${store.ui.bgColor}, ${store.ui.bgColor})`}
 		>
 			<Flex
 				justifyContent="space-evenly"
@@ -23,10 +23,10 @@ export const City = observer(() => {
 			>
 				<Button
 					leftIcon={<ArrowBackIcon boxSize="20px" />}
-					backgroundColor="blue"
+					backgroundColor="blue.500"
 					color="white"
 					_hover={{
-						backgroundColor: "blue",
+						backgroundColor: "blue.500",
 						color: "white",
 						opacity: "0.6",
 					}}

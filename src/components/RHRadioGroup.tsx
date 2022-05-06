@@ -1,21 +1,25 @@
-import { useFormContext, get, useForm } from "react-hook-form";
-import { CRadioGroup, CRadioGroupProps, RadioOptions } from "./CRadioGroup";
+import { Controller } from "react-hook-form";
+import { CRadioGroup, CRadioGroupProps } from "./CRadioGroup";
 
 export type RHRadioGroupProps = CRadioGroupProps & {
 	name: string;
 };
 
-export const RHRadioGroup = ({ name, ...props }: RHRadioGroupProps) => {
-	const {
-		register,
-		formState: { errors },
-	} = useFormContext();
-
+export const RHRadioGroup = ({
+	name,
+	children,
+	...props
+}: RHRadioGroupProps) => {
 	return (
-		<CRadioGroup
-			{...props}
-			{...register(name)}
-			error={get(errors, name)?.message}
+		<Controller
+			name={name}
+			render={({ field, fieldState: { error } }) => {
+				return (
+					<CRadioGroup {...props} {...field} error={error?.message}>
+						{children}
+					</CRadioGroup>
+				);
+			}}
 		/>
 	);
 };

@@ -1,25 +1,32 @@
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 import { useRouter } from "next/router";
-import { Button, Box, Flex, Image, Radio, Stack } from "@chakra-ui/react";
-
+import {
+	Button,
+	Box,
+	Flex,
+	Image,
+	Radio,
+	Stack,
+	useDisclosure,
+	Fade,
+} from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-//import { RHRadio } from "src/components/RHRadio";
+import { RHRadioGroup } from "src/components/RHRadioGroup";
 import { RHInputText } from "src/components/RHInputText";
 import { RHSelect } from "src/components/RHSelect";
-import { useState } from "react";
-
-import { CRadioGroup } from "src/components/CRadioGroup";
 
 type FormData = {
-	city: string;
+	searchMethod: string;
+	city?: string;
+	zip?: string;
+	county: string;
 };
 
 export const Weather = () => {
 	const { handleSubmit } = useFormContext<FormData>();
-
-	const [radio, setRadio] = useState("zip");
-
 	const router = useRouter();
+	const { isOpen, onToggle } = useDisclosure();
+	const searchMethod = useWatch({ name: "searchMethod" });
 	const onSubmit = (data: FormData) => {
 		//router.push(`/weather/${data.city}`);
 		console.log(data);
@@ -36,14 +43,14 @@ export const Weather = () => {
 			alignItems="center"
 			height="100vh"
 			width="100%"
-			bgGradient="linear(to-t, green, white, white)"
+			bgGradient="linear(to-t, green.500, white, white)"
 			flexDirection="column"
 		>
 			<Box as="form" onSubmit={handleSubmit(onSubmit)}>
-				<CRadioGroup
+				<RHRadioGroup
 					name="searchMethod"
-					value={radio}
-					onChange={setRadio}
+					marginBottom="20px"
+					label="Pesquisar por:"
 				>
 					<Stack>
 						<Radio isChecked value="zip">
@@ -51,20 +58,24 @@ export const Weather = () => {
 						</Radio>
 						<Radio value="city">Cidade</Radio>
 					</Stack>
-				</CRadioGroup>
+				</RHRadioGroup>
 
-				<RHInputText
-					name="city"
-					label="Cidade"
-					marginBottom="20px"
-					backgroundColor="white"
-				/>
-				<RHInputText
-					name="zip"
-					label="Código Postal"
-					marginBottom="20px"
-					backgroundColor="white"
-				/>
+				{searchMethod === "zip" ? (
+					<RHInputText
+						name="zip"
+						label="Código Postal"
+						marginBottom="20px"
+						backgroundColor="white"
+					/>
+				) : (
+					<RHInputText
+						name="city"
+						label="Cidade"
+						marginBottom="20px"
+						backgroundColor="white"
+					/>
+				)}
+
 				<RHSelect
 					name="country"
 					selectOptions={countryCodes}
@@ -75,10 +86,10 @@ export const Weather = () => {
 
 				<Button
 					type="submit"
-					backgroundColor="blue"
+					backgroundColor="blue.500"
 					color="white"
 					_hover={{
-						backgroundColor: "blue",
+						backgroundColor: "blue.500",
 						color: "white",
 						opacity: "0.6",
 					}}

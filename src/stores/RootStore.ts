@@ -13,9 +13,6 @@ export const RootModel = types
 			self.name = newName;
 			self.weather = newWeather;
 		},
-		updateUi(newUi: IUiModel) {
-			self.ui = newUi;
-		},
 	}));
 
 export interface IRootModel extends Instance<typeof RootModel> {}

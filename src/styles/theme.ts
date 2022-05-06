@@ -2,8 +2,12 @@ import { extendTheme } from "@chakra-ui/react";
 
 export const theme = extendTheme({
 	colors: {
-		green: "#039700",
-		blue: "#004386",
+		green: {
+			500: "#039700",
+		},
+		blue: {
+			500: "#004386",
+		},
 		sky: {
 			200: "#353f4f",
 			300: "#59729c",

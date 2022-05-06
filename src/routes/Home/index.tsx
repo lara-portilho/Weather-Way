@@ -10,15 +10,15 @@ export const Home = () => {
 			alignItems="center"
 			height="100vh"
 			width="100%"
-			bgGradient="linear(to-t, green, white, white)"
+			bgGradient="linear(to-t, green.500, white, white)"
 			flexDirection="column"
 		>
 			<Heading as="h1">Weather Way</Heading>
 			<Button
-				backgroundColor="blue"
+				backgroundColor="blue.500"
 				color="white"
 				_hover={{
-					backgroundColor: "blue",
+					backgroundColor: "blue.500",
 					color: "white",
 					opacity: "0.6",
 				}}
