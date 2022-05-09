@@ -1,5 +1,5 @@
 import { Instance, types } from "mobx-state-tree";
-import { IUiModel, UiModel } from "./UiModel";
+import { UiModel } from "./UiModel";
 import { WeatherModel, IWeatherModel } from "./WeatherModel";
 
 export const RootModel = types

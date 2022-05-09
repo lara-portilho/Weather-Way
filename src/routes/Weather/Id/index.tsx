@@ -4,7 +4,7 @@ import { Box, Button, Flex, Heading, Image, Text } from "@chakra-ui/react";
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../../providers/Store";
 
-export const City = observer(() => {
+export const Id = observer(() => {
 	const router = useRouter();
 	const store = useStore();
 

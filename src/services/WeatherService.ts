@@ -4,12 +4,18 @@ import { IWeatherModel } from "../stores/WeatherModel";
 export class WeatherService {
 	constructor(private http: IHttpClient) {}
 
-	public async getWeather(city: string): Promise<IWeatherModel> {
+	public async getWeather(
+		searchMethod: string,
+		id: string,
+		country: string
+	): Promise<any> {
 		const response = await this.http({
 			method: "GET",
 			url: "/weather",
 			params: {
-				city,
+				searchMethod,
+				id,
+				country,
 			},
 		});
 
@@ -23,6 +29,11 @@ export class WeatherService {
 			temperature: data.main.temp,
 		};
 
-		return newWeather;
+		const res = {
+			name: data.name,
+			weather: newWeather,
+		};
+
+		return res;
 	}
 }

@@ -2,33 +2,37 @@ import { observer } from "mobx-react-lite";
 import { GetServerSideProps, NextPage } from "next";
 import { useEffect } from "react";
 import { useStore } from "src/providers/Store";
-import { City } from "src/routes/Weather/City";
+import { Id } from "src/routes/Weather/Id";
 import { getHttpClient } from "src/services/httpClient";
 import { WeatherService } from "src/services/WeatherService";
-import { IUiModel } from "src/stores/UiModel";
 import { IWeatherModel } from "src/stores/WeatherModel";
 
-type CityPageProps = {
-	city: string;
+type IdPageProps = {
+	name: string;
 	weather: IWeatherModel;
 };
 
-const CityPage: NextPage<CityPageProps> = observer(({ city, weather }) => {
+const IdPage: NextPage<IdPageProps> = observer(({ name, weather }) => {
 	const store = useStore();
 
 	useEffect(() => {
-		store.changeCity(city, weather);
+		store.changeCity(name, weather);
 	}, []);
 
-	return <City />;
+	return <Id />;
 });
 
-export default CityPage;
+export default IdPage;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-	const { city } = ctx.query;
-	const weatherService = new WeatherService(getHttpClient("next"));
+	const { sm, id, country } = ctx.query;
 
-	const weather = await weatherService.getWeather(city as string);
-	return { props: { city, weather } };
+	const weatherService = new WeatherService(getHttpClient("next"));
+	const { name, weather } = await weatherService.getWeather(
+		sm as string,
+		id as string,
+		country as string
+	);
+
+	return { props: { name, weather } };
 };
