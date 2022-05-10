@@ -42,9 +42,8 @@ export const Weather = () => {
 			let arr: CountryCodes[] = [];
 			const data = await countryService.getCountries();
 			data.forEach((c: any) => {
-				const code = Object.entries(c)[1][1];
 				const country: CountryCodes = {
-					value: code as string,
+					value: c["alpha-2"],
 					label: c.name,
 				};
 
