@@ -2,7 +2,6 @@ import { useFormContext, useWatch } from "react-hook-form";
 import { useRouter } from "next/router";
 import { Button, Box, Flex, Image, Radio, Stack } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-import { SearchCityHelper } from "src/forms/helpers/SearchCityHelper";
 import { RHRadioGroup } from "src/components/RHRadioGroup";
 import { RHInputText } from "src/components/RHInputText";
 import { RHSelect } from "src/components/RHSelect";
@@ -64,7 +63,12 @@ export const Weather = () => {
 			bgGradient="linear(to-t, green.500, white, white)"
 			flexDirection="column"
 		>
-			<Box as="form" onSubmit={handleSubmit(onSubmit)} marginX="20px">
+			<Box
+				as="form"
+				onSubmit={handleSubmit(onSubmit)}
+				marginX="20px"
+				maxWidth="500px"
+			>
 				<RHRadioGroup
 					name="searchMethod"
 					marginBottom="20px"
