@@ -4,9 +4,10 @@
 </div>
 
 ## Sumário
-- [Informações Gerais](#informações-gerais)
-- [Tecnologias](#tecnologias)
-- [Instalação](#instalação)
+
+-   [Informações Gerais](#informações-gerais)
+-   [Tecnologias](#tecnologias)
+-   [Instalação](#instalação)
 
 ## Informações Gerais
 
@@ -14,20 +15,20 @@ Weather Way é um projeto simples de consulta do tempo em um local baseado em um
 
 ## Tecnologias
 
-- NextJs
-- ChakraUI
-- mobx-state-tree
-- React Hook Forms
-
+-   NextJs
+-   ChakraUI
+-   mobx-state-tree
+-   React Hook Forms
 
 ## Instalação
 
 ### Pré-requisitos
-- Possuir Node e Yarn instalado
-- Possuir conta no [OpenWeather](https://openweathermap.org/)
+
+-   Possuir Node e Yarn instalado
+-   Possuir conta no [OpenWeather](https://openweathermap.org/)
 
 1. Clone o repositório
-2. ```$ yarn```
-3. Troque o nome do arquivo ```exemple.env.local``` para ```.env.local``` e insira sua key do [OpenWeather](https://openweathermap.org/api) - Current Weather Data
-4. ```$ yarn dev```
+2. `$ yarn`
+3. Troque o nome do arquivo `example.env.local` para `.env.local` e insira sua key do [OpenWeather](https://openweathermap.org/api) - Current Weather Data
+4. `$ yarn dev`
 5. Acesse http://localhost:3000
